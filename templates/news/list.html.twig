@@ -5,6 +5,10 @@
     {{ encore_entry_link_tags('news') }}
 {% endblock %}
 
+{% block body %}
+    <h1>{% trans %}titles.news{% endtrans %}</h1>
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('news') }}

@@ -13,7 +13,7 @@ class NewsController extends AbstractController
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/news/")
+     * @Route("/news/",  name="newslist")
      */
     public function index(Request $request)
     {

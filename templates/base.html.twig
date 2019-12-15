@@ -11,35 +11,52 @@
     {% endblock %}
 </head>
 <body>
+{% set route = app.request.attributes.get('_route') %}
+{% set route_params = app.request.attributes.get('_route_params') %}
+{% set params = route_params|merge(app.request.query.all) %}
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="{{ path('homepage') }}">{{ app_name }} </a>
 
     <!-- Links -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#">Link 1</a>
+            <a class="nav-link" href="{{ path('homepage') }}">{% trans %}navigation.home{% endtrans %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link 2</a>
+            <a class="nav-link" href="{{ path('newslist') }}">{% trans %}navigation.news{% endtrans %}</a>
         </li>
-
+    </ul>
+    <div class="navbar-nav ml-auto">
         <!-- Dropdown -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                Dropdown link
+                {{ ('lang.' ~ app.request.locale) | trans }}
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Link 1</a>
-                <a class="dropdown-item" href="#">Link 2</a>
-                <a class="dropdown-item" href="#">Link 3</a>
+                {% for locale in supported_locales %}
+                    {% if app.request.locale != locale %}
+                        <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: locale })) }}">{{ ('lang.' ~ locale) | trans }}</a>
+                    {% endif %}
+                {% endfor %}
+
             </div>
         </li>
-    </ul>
+    </div>
 </nav>
-{% block body %}{% endblock %}
+<div class="container">
+    {% block body %}
+    {% endblock %}
+</div>
+
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Created By Ruslan Pulypenko</span>
+    </div>
+</footer>
 </body>
 </html>
