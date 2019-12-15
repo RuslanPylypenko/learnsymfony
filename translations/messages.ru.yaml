@@ -6,4 +6,7 @@ lang.uk: Укр
 
 titles:
   news: Новости
+  home: Бронирование столиков онлайн
 
+home:
+  description: Создано с помощью Symfony Framework
