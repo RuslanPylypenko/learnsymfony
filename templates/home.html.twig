@@ -1,10 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block title %}Home Page!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('index') }}
+{% endblock %}
 {% block body %}
 
-    <div class="jumbotron">
+    <div class="jumbotron header" style="background-image: url('{{ asset('/img/header-bg/morning.jpg') }}')">
         <h1>{{ "titles.home" | trans }}</h1>
         <p>{{ "home.description" | trans }}</p>
     </div>
 
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('index') }}
+    {% endblock %}
 {% endblock %}
