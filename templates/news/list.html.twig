@@ -8,6 +8,14 @@
 {% block body %}
     <div class="container">
         <h1>{% trans %}titles.news{% endtrans %}</h1>
+
+        {% for new in news %}
+            {{ new.title }}
+            {{ new.text }}
+            {{ new.createdAt|date("F jS \\a\\t g:ia") }}
+
+            {{ new.image }}
+        {% endfor %}
     </div>
 {% endblock %}
 
