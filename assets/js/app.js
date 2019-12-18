@@ -14,3 +14,12 @@ import $ from 'jquery';
 import 'popper.js';
 
 import "bootstrap";
+
+
+$('.news-item').each(function (key, element) {
+
+   let cHeight = $(element).find('.news-title').outerHeight();
+   let allHeight = $('.news-item .news-title').height();
+   if(cHeight > allHeight ) $('.news-item .news-title').height(cHeight + 20);
+
+});

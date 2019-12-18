@@ -1,0 +1,28 @@
+{# news/list.html.twig #}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('news') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{% trans %}titles.news{% endtrans %}</h1>
+
+
+        <div class="col-sm-12 news-item">
+            <h4 class="h5 news-title">{{ new.title }}</h4>
+            <p class="text-info"> {{ new.createdAt|date("F jS \\a\\t g:ia") }}</p>
+            <img src="{{ asset('/img/' ~ new.image) }}" class="img-thumbnail" alt="{{ new.title }}">
+            <p>{{ new.text }}</p>
+        </div>
+
+        <a href="{{ path("newslist") }}" class="btn btn-primary">{{ "go.newList" | trans }}</a>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('news') }}
+{% endblock %}

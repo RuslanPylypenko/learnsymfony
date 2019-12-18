@@ -15,7 +15,7 @@ class NewsController extends AbstractController
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/news/",  name="newslist")
+     * @Route("/novosti/",  name="newslist")
      */
     public function index(Request $request)
     {
@@ -27,9 +27,22 @@ class NewsController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Article $article
+     * @return Response
+     * @Route("/novosti/{id}", name="newView")
+     */
+    public function show(Article $article)
+    {
+        return $this->render('/news/view.html.twig', [
+            'new' => $article
+        ]);
+    }
+
 
     /**
      * @return Response
+     * @throws \Exception
      * @Route("/news/create", name="create_article")
      */
     public function createNew():Response
@@ -41,13 +54,13 @@ class NewsController extends AbstractController
         $new->setCreatedAt(new \DateTime());
         $new->setImage('/news/default.jpg');
         $new->setStatus(1);
-        $new->setText("This is a first article in symfony project");
-        $new->setTitle("First new");
+        $new->setText("Что такое Голливуд? Это красивая жизнь, бесконечные развлечения, головокружительные вечеринки с селебритис и всепоглощающий культ кинематографа. И ресторан \"Public Cafe\" предлагает встретить Новый 2020 Год именно так!");
+        $new->setTitle("Hollywood New Year в ресторане \"Public Cafe\"");
         $new->setUpdatedAt(new \DateTime());
 
         $entityManager->persist($new);
 
-        //$entityManager->flush();
+        $entityManager->flush();
 
         return new Response("Saved new product with id {$new->getId()}");
     }

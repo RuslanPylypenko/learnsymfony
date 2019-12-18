@@ -10,3 +10,6 @@ titles:
 
 home:
   description: Создано с помощью Symfony Framework
+
+go:
+  newList: Вернуться к списку новостей
