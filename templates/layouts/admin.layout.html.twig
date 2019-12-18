@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Symfony App!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+{% set route = app.request.attributes.get('_route') %}
+{% set route_params = app.request.attributes.get('_route_params') %}
+{% set params = route_params|merge(app.request.query.all) %}
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="{{ path('homepage') }}">{{ app_name }} </a>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('AdminArticles') }}">Статьи</a>
+        </li>
+    </ul>
+    <div class="navbar-nav ml-auto">
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                {{ ('lang.' ~ app.request.locale) | trans }}
+            </a>
+            <div class="dropdown-menu">
+                {% for locale in supported_locales %}
+                    {% if app.request.locale != locale %}
+                        <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: locale })) }}">{{ ('lang.' ~ locale) | trans }}</a>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        </li>
+    </div>
+</nav>
+{% block body %}{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Created By Ruslan Pulypenko</span>
+    </div>
+</footer>
+</body>
+</html>
