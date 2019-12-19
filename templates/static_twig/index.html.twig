@@ -80,6 +80,55 @@
                     </div>
                 </div>
             </li>
+
+            <li class="list-group-item">
+                <p><kbd> country_name </kbd></p>
+                {{ 'US'|country_name('fr') }}
+                <br>
+                {{ 'US'|country_name('uk') }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd> currency_name </kbd></p>
+                {{ 'EUR'|currency_name('en') }}
+                <br>
+                {{ 'PLN'|currency_name('ru') }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd> currency_symbol </kbd></p>
+                {{ 'PLN'|currency_symbol('en') }}
+                <br>
+                {{ 'JPY'|currency_symbol('ru') }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd> date_modify + 1 day </kbd></p>
+                {% set published_at = "2019-12-19" %}
+                {{ published_at|date_modify("+1 day")|date("m/d/Y") }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>default </kbd></p>
+                {{ test_none_var|default('var is not defined') }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>escape</kbd></p>
+                {% set user = {username: "Vasya <strong>Pupkin</strong>"} %}
+                {{ user.username|escape }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>filter</kbd></p>
+                {% set sizes = [34,35,36,37,38,39,42,14] %}
+                {{ sizes | filter(v => v > 37) | join(', ') }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd></kbd></p>
+            </li>
+
         </ul>
 
     </div>
