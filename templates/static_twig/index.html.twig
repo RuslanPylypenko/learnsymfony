@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% set number = -600 %}
+
+{% set items = ['a', 'b', 'c', 'd', 'e', 'f', 'g'] %}
+
+
+{% block title %}Hello StaticTwigController!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        <h1>Hello {{ controller_name }}! ✅</h1>
+
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a
+                            href="{{ '/var/www/learnsymfony/src/Controller/StativTwigController.php'|file_link(0) }}">src/Controller/StativTwigController.php</a></code>
+            </li>
+            <li>Your template at <code><a
+                            href="{{ '/var/www/learnsymfony/templates/stativ_twig/index.html.twig'|file_link(0) }}">templates/stativ_twig/index.html.twig</a></code>
+            </li>
+        </ul>
+
+        <hr>
+    </div>
+
+    <div class="container">
+        <h1>Filters</h1>
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                <p><kbd> abs </kbd></p>
+                {{ number|abs }}
+            </li>
+            <li class="list-group-item">
+                <p><kbd> batch </kbd></p>
+                <table class="table">
+                    {% for row in items|batch(3, 'No item') %}
+                        <tr>
+                            {% for column in row %}
+                                <td>{{ column }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd> capitalize </kbd></p>
+                {{ 'my first car'|capitalize }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd> column </kbd></p>
+                {% set items = [{ 'fruit' : 'apple'}, {'fruit' : 'orange' }] %}
+                {% set fruits = items|column('fruit') %}
+                items = [{ 'fruit' : 'apple'}, {'fruit' : 'orange' }] <br>
+                fruits = items|column('fruit')
+                <hr>
+                <div class="table">
+                    <div class="tr">
+                        {% for fruit in fruits %}
+                            <div class="td">
+                                {{ fruit }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
