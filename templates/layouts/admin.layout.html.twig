@@ -15,6 +15,16 @@
 {% set route_params = app.request.attributes.get('_route_params') %}
 {% set params = route_params|merge(app.request.query.all) %}
 
+{# read and display all flash messages #}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }} alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="{{ path('homepage') }}">{{ app_name }} </a>
