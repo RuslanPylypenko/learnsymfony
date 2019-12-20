@@ -126,7 +126,93 @@
             </li>
 
             <li class="list-group-item">
+                <p><kbd>format</kbd></p>
+                {% set foo = "string" %}
+                {{ "I like %s and %s."|format(foo, "bar") }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>format_datetime</kbd></p>
+                {{ '2019-08-07 23:39:12'|format_datetime('full', 'full', locale='fr') }} <br>
+                {{ '2019-08-07 23:39:12'|format_datetime('full', 'none', locale='uk') }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>format_number</kbd></p>
+                {{ '12.345'|format_number }} <br>
+                {{ '12.345'|format_number(style='spellout') }} <br>
+                {{ '12'|format_number(style='scientific') }} <br>
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>join</kbd></p>
+                {{ [1, 2, 3, 4, 5]|join(', ',' and ') }}
+
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>json_encode</kbd></p>
+                {% set data = {a: 3, b: 5} %}
+                {{ data|json_encode() }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>language_name</kbd></p>
+                {{ 'de'|language_name }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>map</kbd></p>
+                {% set people = {
+                    "Bob": "Smith",
+                    "Alice": "Dupond",
+                } %}
+
+                {{ people|map((last, first) => "#{first} #{last}")|join(', ') }}
+            </li>
+
+            <li class="list-group-item">
+                <p><kbd>markdown_to_html</kbd></p>
+
+                {% apply markdown_to_html %}
+                    ## Lists
+
+                    Unordered
+
+                    + Create a list by starting a line with `+`, `-`, or `*`
+                    + Sub-lists are made by indenting 2 spaces:
+                    - Marker character change forces new list start:
+                    * Ac tristique libero volutpat at
+                    + Facilisis in pretium nisl aliquet
+                    - Nulla volutpat aliquam velit
+                    + Very easy
+
+                    Block code "fences"
+
+                    ```
+                    Sample text here...
+                    ```
+
+                    ## Images
+
+                    ![Minion](https://octodex.github.com/images/minion.png)
+
+                {% endapply %}
+            </li>
+
+
+            <li class="list-group-item">
+                <p><kbd>reduce [1, 2, 3] </kbd></p>
+
+                {% set numbers = [1, 2, 3] %}
+
+                {{ numbers|reduce((carry, v) => carry + v) }}
+            </li>
+
+
+            <li class="list-group-item">
                 <p><kbd></kbd></p>
+
             </li>
 
         </ul>

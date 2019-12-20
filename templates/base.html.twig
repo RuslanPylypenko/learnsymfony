@@ -35,12 +35,12 @@
         <!-- Dropdown -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                {{ ('lang.' ~ app.request.locale) | trans }}
+                {{ app.request.locale|language_name|capitalize }}
             </a>
             <div class="dropdown-menu">
                 {% for locale in supported_locales %}
                     {% if app.request.locale != locale %}
-                        <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: locale })) }}">{{ ('lang.' ~ locale) | trans }}</a>
+                        <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: locale })) }}">{{ locale|language_name|capitalize }}</a>
                     {% endif %}
                 {% endfor %}
 
