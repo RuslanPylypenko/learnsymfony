@@ -122,4 +122,12 @@ class Article
 
         return $this;
     }
+
+    public function getImageSrc()
+    {
+        if($this->image){
+            return "/uploads/articles/" . $this->image;
+        }
+        return "/img/news/default.jpg";
+    }
 }

@@ -10,6 +10,8 @@ parameters:
 
     app.supported_locales: ['ru', 'uk']
 
+    article_image_directory: '%kernel.project_dir%/public/uploads/articles'
+
 
 services:
     # default configuration for services in *this* file

@@ -15,7 +15,7 @@
                     <h4 class="h5 news-title">
                         <a class="text-dark" href="{{ path('newView', {id: new.id}) }}">{{ new.title }}</a>
                     </h4>
-                    <img src="{{ asset('/img/' ~ new.image) }}" class="img-thumbnail" alt="{{ new.title }}">
+                    <img src="{{ asset(new.imageSrc) }}" class="img-thumbnail" alt="{{ new.title }}">
                     <p class="text-info"> {{ new.createdAt|date("F jS \\a\\t g:ia") }}</p>
                 </div>
             {% endfor %}
